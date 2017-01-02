@@ -10,4 +10,6 @@ First of all you have to clone this repo and follow these few steps.
 
 3) $ oadm policy add-scc-to-user privileged system:serviceaccount:cfme:cfmesvcacc 
 
-4) 
+4) $ oc create -f openshift-cloudforms-template.json
+
+

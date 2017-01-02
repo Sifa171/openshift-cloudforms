@@ -1,0 +1,148 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": 
+	{
+		"name": "cloudforms-emphemeral",
+		"template": "cloudforms-emphemeral",
+		"annotations": {
+            "description": "CFME 4.1 without persistent Storage!\nWARNING: The CFME DockerImage is in TECH PREVIEW! \nWARNING: Any data stored will be lost upon pod destruction. Only use this template for testing!",
+            "iconClass": "icon-jboss",
+            "tags": "instant-app,cloudforms"
+        }
+	},
+	"message": "A Cloudforms service has been created in your project.  The username/password are admin/smartvm.",
+    "objects": [
+	{
+		    "kind": "DeploymentConfig",
+			"apiVersion": "v1",
+			"metadata": {
+				"name": "cfme",
+				"labels": {
+					"app": "cfme",
+					"template": "openshift-cloudforms"
+				}
+			},
+			"spec": {
+				"strategy": {
+					"type": "Rolling",
+					"rollingParams": {
+						"updatePeriodSeconds": 1,
+						"intervalSeconds": 1,
+						"timeoutSeconds": 600,
+						"maxUnavailable": "25%",
+						"maxSurge": "25%"
+					}
+				},
+				"triggers": [
+					{
+						"type": "ConfigChange"
+					}
+				],
+				"replicas": 1,
+				"selector": {
+					"deploymentconfig": "cfme"
+				},
+				"template": {
+					"metadata": {
+						"creationTimestamp": null,
+						"labels": {
+							"app": "cfme",
+							"deploymentconfig": "cfme",
+							"template": "openshift-cloudforms"
+						}
+					},
+					"spec": {
+						"containers": [
+							{
+								"name": "cfme",
+								"image": "registry.access.redhat.com/cloudforms/cfme4:latest",
+								"ports": [
+									{
+										"containerPort": 80,
+										"protocol": "TCP"
+									},
+									{
+										"containerPort": 443,
+										"protocol": "TCP"
+									}
+								],
+								"imagePullPolicy": "IfNotPresent",
+								"securityContext": {
+									"privileged": true
+								}
+                    }
+                ],
+                "serviceAccountName": "cfmesvcacc",
+                "serviceAccount": "cfmesvcacc",
+                "securityContext": {}
+				}
+			}
+		}
+	},
+	{
+		"kind": "Service",
+		"apiVersion": "v1",
+		"metadata": {
+			"name": "cfme",
+			"labels": {
+				"app": "cfme",
+				"template": "openshift-cloudforms"
+			}
+		},
+		"spec": {
+			"ports": [
+				{
+					"name": "80-tcp",
+					"protocol": "TCP",
+					"port": 80,
+					"targetPort": 80
+				},
+				{
+					"name": "443-tcp",
+					"protocol": "TCP",
+					"port": 443,
+					"targetPort": 443
+				}
+			],
+			"selector": {
+				"deploymentconfig": "cfme"
+			},
+			"sessionAffinity": "None"
+		}
+	},
+	{
+		"kind": "Route",
+		"apiVersion": "v1",
+		"metadata": {
+			"name": "cfme",
+			"labels": {
+				"app": "cfme",
+				"template": "openshift-cloudforms"
+			}
+		},
+		"spec": {
+			"host": "${HOSTNAME}",
+			"to": {
+				"kind": "Service",
+				"name": "cfme"
+			},
+			"port": {
+				"targetPort": "443-tcp"
+			},
+			"tls": {
+				"termination": "passthrough"
+			}
+		}
+	}
+    ],
+	"parameters":
+	[
+		{
+			"name": "HOSTNAME",
+			"description": "Hostname for your CFME",
+			"required": true
+		}
+	]
+}
+
