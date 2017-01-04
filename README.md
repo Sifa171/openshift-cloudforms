@@ -1,4 +1,4 @@
-# openshift-cloudforms
+﻿# openshift-cloudforms
 
 This template is related to a DockerImage created by Red Hat, which is in state tech preview. If you need more information, then take a look at this blog: http://cloudformsblog.redhat.com/2016/09/14/cloudforms-as-a-container/
 
@@ -21,4 +21,8 @@ First of all you have to clone this repo and follow these few steps.
 2) Cloudforms 4.1 
 
 # outcome
+
+
+
+
 
