@@ -2,6 +2,16 @@
 
 This template is related to a DockerImage created by Red Hat, which is in state tech preview. If you need more information, then take a look at this blog: http://cloudformsblog.redhat.com/2016/09/14/cloudforms-as-a-container/
 
+### Prerequisites
+
+If not already happened, then add the Red Hat Docker Registry by following these steps.
+
+1) Edit /etc/sysconfig/docker and amend the Red Hat registry to the ADD_REGISTRY key
+```
+ADD_REGISTRY='--add-registry registry.access.redhat.com'
+```
+2) Restart the docker service.
+
 ### How to get it work
 
 First of all you have to clone this repo and follow these few steps.
