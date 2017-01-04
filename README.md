@@ -6,14 +6,15 @@ This template is related to a DockerImage created by Red Hat, which is in state 
 
 First of all you have to clone this repo and follow these few steps.
 
-1) $ oc new-project cfme --display-name="Cloudforms Management Environment" 
+```
+$ oc new-project cfme --display-name="Cloudforms Management Environment" 
 
-2) $ oc create serviceaccount cfmesvcacc -n cfme
+$ oc create serviceaccount cfmesvcacc -n cfme
 
-3) $ oadm policy add-scc-to-user privileged system:serviceaccount:cfme:cfmesvcacc 
+$ oadm policy add-scc-to-user privileged system:serviceaccount:cfme:cfmesvcacc 
 
-4) $ oc create -f openshift-cloudforms-template.json
-
+$ oc create -f openshift-cloudforms-template.json
+```
 
 # my versions
 
