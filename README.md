@@ -23,3 +23,4 @@ First of all you have to clone this repo and follow these few steps.
 
 # outcome
 
+![alt tag](http://url/to/img.png)
