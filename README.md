@@ -18,11 +18,8 @@ First of all you have to clone this repo and follow these few steps.
 # my versions
 
 1) OpenShift Origin 1.3
+
 2) Cloudforms 4.1 
 
 # outcome
-
-
-
-
 
