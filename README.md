@@ -23,4 +23,8 @@ First of all you have to clone this repo and follow these few steps.
 
 # outcome
 
-![alt tag](http://url/to/img.png)
+![OCSP Project Overview](https://github.com/Sifa91/openshift-cloudforms/blob/master/doc/oscp_overview.png)
+
+![CFME Login](https://github.com/Sifa91/openshift-cloudforms/blob/master/doc/login.png)
+
+![CFME Overview](https://github.com/Sifa91/openshift-cloudforms/blob/master/doc/cfme_overview.png)
